@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>보고서 리스트</title>
+</head>
+
+<style>
+	.layout {
+		width : 0 auto;
+		margin : 0 auto;
+		margin-top : 40px;
+	}
+
+</style>
+
+<body>
+	<a href="/">홈으로</a>
+	
+	<hr />
+	<h1>보고서 리스트</h1>
+	<div class="layout">
+		<form th:action="@{/board/list}" method="get" style="margin-bottom : 10px">
+			<select th:name="searchType">
+				<option value="title">제목</option>
+				<option value="name">등록자</option>
+				<option value="main">대분류</option>
+				<option value="sub">중분류</option>
+			</select>		
+			<input type="text" name="searchKeyword">
+			<button type="submit">검색</button>
+		</form>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>등록자</th>
+					<th>등록일</th>
+					<th>대분류</th>
+					<th>중분류</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="board : ${list}">
+					<td th:text="${board.REPNO}"></td>
+					<td><a th:text="${board.REPNAME}" th:href="@{/board/view(id=${board.REPNO})}"></a></td>
+					<td></td>
+					<td th:text="${board.REGDATETIME}"></td>
+					<td th:text="${board.MAINCATEGORY}"></td>
+					<td th:text="${board.SUBCATEGORY}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+			<a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page - 1})}" th:text="${page}"></a>
+			<strong th:if="${page == nowPage}" th:text="${page}" style="color : red"></strong>
+		</th:block>
+			<form th:action="@{/board/write}" style="margin-top : 10px">
+				<button type="submit">새글작성</button>
+			</form>
+	</div>
+</body>
+</html>

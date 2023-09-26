@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>회원 리스트</title>
+</head>
+
+<style>
+	.layout {
+		width : 0 auto;
+		margin : 0 auto;
+		margin-top : 40px;
+	}
+
+</style>
+
+<body>
+	<a href="/">홈으로</a>
+	<hr />
+	<h1>회원 리스트</h1>
+	<div class="layout">
+		<form th:action="@{/member/list}" method="get" style="margin-bottom : 10px">
+			<select th:name="searchType">
+				<option th:value="name">성명</option>
+				<option th:value="id">아이디</option>
+				<option th:value="department">부서</option>
+				<option th:value="grade">직급</option>
+				<option th:value="position">직책</option>
+				<option th:value="phone">전화번호</option>
+			</select>
+			<input type="text" name="searchKeyword">
+			<button type="submit">검색</button>
+		</form>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>성명</th>
+					<th>아이디</th>
+					<th>부서</th>
+					<th>직급</th>
+					<th>직책</th>
+					<th>전화번호</th>
+					<th>등록일</th>
+					<th>사용여부</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="member : ${list}">
+					<td th:text="${member.MEMNO}"></td>
+					<td><a th:text="${member.MEMNAME}" th:href="@{/member/view(id=${member.MEMNO})}"></a></td>
+					<td th:text="${member.MEMID}"></td>
+					<td th:text="${member.DEPARTMENT}"></td>
+					<td th:text="${member.GRADE}"></td>
+					<td th:text="${member.POSITION}"></td>
+					<td th:text="${member.PHONE}"></td>
+					<td th:text="${member.REGDATETIME}"></td>
+					<td th:text="${member.ISUSE}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+			<a th:if="${page != nowPage}" th:href="@{/member/list(page = ${page - 1})}" th:text="${page}"></a>
+			<strong th:if="${page == nowPage}" th:text="${page}" style="color : red"></strong>
+		</th:block>
+	</div>
+
+</body>
+</html>

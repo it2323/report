@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>로그인 페이지</title>
+	</head>
+	<body>
+		<h1>로그인</h1>
+		<div>
+			<form action="/member/loginPro" method="post">
+				id <input type="text" name="MEMID" placeholder="아이디를 입력하세요"><br />
+				pw <input type="text" name="MEMPW" placeholder="비밀번호를 입력하세요"><br />
+				<button type="submit">로그인</button>
+				<a href="/member/new">회원가입</a>
+			</form>
+		</div>
+	</body>
+</html>

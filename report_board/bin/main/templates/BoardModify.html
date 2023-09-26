@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>보고서 수정</title>
+	<style>
+		.layout {
+			width : 0 auto;
+			margin : 0 auto;
+			margin-top : 40px;
+		}
+		
+		.layout input {
+			width : 100%;
+			box-sizing : border-box
+		}
+		
+		.layout textarea {
+			width : 100%;
+			margin-top : 10px;
+			min-height : 300px;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="layout">
+		<form th:action="@{/board/update/{id}(id=${board.REPNO})}" method="post">
+				<select th:name="main">
+					<option th:value="${board.MAINCATEGORY}" th:utext="${board.MAINCATEGORY}" selected></option>
+					<option th:each="type : ${maincategory}" 
+							th:value="${type?.TYPENAME}" 
+							th:utext="${type?.TYPENAME}"></option>
+				</select>		
+				<select th:name="sub">
+					<option th:value="${board.SUBCATEGORY}" th:utext="${board.SUBCATEGORY}"></option>
+					<option th:each="type : ${subcategory}" 
+							th:value="${type?.TYPENAME}" 
+							th:utext="${type?.TYPENAME}"></option>
+				</select><br />
+			<input name="REPNAME" type="text" th:value="${board.REPNAME}">
+			<textarea name="REPCONTENT" th:text="${board.REPCONTENT}"></textarea>
+			<button type="submit" onclick="alert('보고서가 수정되었습니다');">수정</button>
+			<button type="button" onclick="window.history.back()">취소</button>
+		</form>	
+	</div>	
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>회원정보 수정</title>
+	<style>
+		.layout {
+			width : 0 auto;
+			margin : 0 auto;
+			margin-top : 40px;
+		}
+		
+		.layout input {
+			width : 100%;
+			box-sizing : border-box
+		}
+		
+		.layout textarea {
+			width : 100%;
+			margin-top : 10px;
+			min-height : 300px;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="layout">
+		<form th:action="@{/member/update/{id}(id=${member.MEMNO})}" method="post">
+			아이디 <input type="text" name="MEMID" th:value="${member.MEMID}" placeholder="아이디를 입력하세요" readonly>
+			비밀번호 <input type="text" name="MEMPW" th:value="${member.MEMPW}" placeholder="비밀번호르 입력하세요" readonly>
+			이름 <input type="text" name="MEMNAME" th:value="${member.MEMNAME}" placeholder="이름을 입력하세요">
+			생년월일 <input type="date" name="BIRTHDATE" th:value="${member.BIRTHDATE}"><br />
+			이메일 <input type="email" name="EMAIL" th:value="${member.EMAIL}" placeholder="이메일을 입력하세요"><br />
+			전화번호 <input type="text" name="PHONE" th:value="${member.PHONE}" placeholder="전화번호를 입력하세요"><br />
+			주소 <input type="text" name="ADDRESS" th:value="${member.ADDRESS}" placeholder="주소를 입력하세요"><br />
+			입사일 <input type="date" name="JOINDATE" th:value="${member.JOINDATE}" placeholder="입사일을 입력하세요"><br />
+			퇴사일 <input type="date" name="LEAVEDATE" th:value="${member.LEAVEDATE}" placeholder="퇴사일을 입력하세요"><br />
+			부서 	<select th:name="department">
+					<option th:value="${member.DEPARTMENT}" th:utext="${member.DEPARTMENT}" selected></option>
+					<option th:each="type : ${department}" 
+							th:value="${type?.TYPENAME}" 
+							th:utext="${type?.TYPENAME}"></option>
+				</select><br />
+			직급 <select th:name="grade">					
+					<option th:value="${member.GRADE}" th:utext="${member.GRADE}" selected></option>
+					<option th:each="type : ${grade}" 
+							th:value="${type?.TYPENAME}" 
+							th:utext="${type?.TYPENAME}"></option>
+				</select><br />
+			직책 <select th:name="position">					
+					<option th:value="${member.POSITION}" th:utext="${member.POSITION}" selected></option>
+					<option th:each="type : ${position}" 
+							th:value="${type?.TYPENAME}" 
+							th:utext="${type?.TYPENAME}"></option>
+				</select><br />
+			급여 <input type="number" name="SALARY" th:value="${member.SALARY}" placeholder="급여를 입력하세요"><br />
+			<button type="submit" onclick="alert('회원정보가 수정되었습니다');">수정</button>
+		</form>	
+		<button onclick="window.history.back()">취소</button>
+	</div>	
+</body>
+</html>

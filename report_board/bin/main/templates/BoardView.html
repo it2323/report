@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${board.REPNAME}"></title>
+</head>
+<body>
+	<p>번호: <a th:text="${board.REPNO}"></a></p>
+	<p>등록일: <a th:text="${board.REGDATETIME}"></a></p>
+	<p>수정일: <a th:text="${board.MODDATETIME}"></a></p>
+	<p>대분류: <a th:text="${board.MAINCATEGORY}"></a></p>
+	<p>중분류: <a th:text="${board.SUBCATEGORY}"></a></p>
+	<p>등록자: <a></a></p>
+	<p th:text="${board.REPNAME}" style="width : 500px; border-style : double">제목</p>
+	<p th:text="${board.REPCONTENT}" style="width : 500px; height : 400px; border-style : double">내용</p>
+	<c:if>
+		<form th:action="@{/board/modify/{id}(id=${board.REPNO})}">
+			<button type="submit">수정</button>
+		</form>
+		<a th:href="@{/board/delete(id=${board.REPNO})}">삭제</a>
+	</c:if>
+</body>
+</html>

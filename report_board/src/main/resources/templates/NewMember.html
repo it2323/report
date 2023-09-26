@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>회원가입</title>
+	</head>
+	<body>
+		<h1>회원가입</h1>
+		<div>
+			<form method="post">
+				이름 <input type="text" name="MEMNAME" placeholder="이름을 입력하세요"><br />
+				아이디 <input type="text" name="MEMID" placeholder="아이디를 입력하세요"><br />
+				비밀번호 <input type="password" name="MEMPW" placeholder="비밀번호를 입력하세요"><br />
+				생년월일 <input type="date" name="BIRTHDATE"><br />
+				이메일 <input type="email" name="EMAIL" placeholder="이메일을 입력하세요"><br />
+				전화번호 <input type="text" name="PHONE" placeholder="전화번호를 입력하세요"><br />
+				직급 <select name="grade">				
+						<option value="">선택안함</option>
+						<option th:each="type : ${grade}" 
+								th:value="${type?.TYPENAME}" 
+								th:utext="${type?.TYPENAME}"></option>
+					</select><br />
+				직책 <select name="position">
+						<option value="">선택안함</option>
+						<option th:each="type : ${position}" 
+								th:value="${type?.TYPENAME}" 
+								th:utext="${type?.TYPENAME}"></option>					
+					</select><br />
+				부서 <select name="department">		
+						<option value="">선택안함</option>
+						<option th:each="type : ${department}" 
+								th:value="${type?.TYPENAME}" 
+								th:utext="${type?.TYPENAME}"></option>
+					</select><br />
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+				<button type="submit" formaction="/member/newPro" onclick="alert('회원가입 되었습니다')">회원가입</button>
+				<button type="button" onclick="window.history.back()">취소</button>
+			</form>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>작성 페이지</title>
+	</head>
+	<style>
+		.layout {
+			width : 0 auto;
+			margin : 0 auto;
+			margin-top : 40px;
+		}
+		
+		.layout input {
+			width : 100%;
+			box-sizing : border-box
+		}
+		
+		.layout textarea {
+			width : 100%;
+			margin-top : 10px;
+			min-height : 300px;
+		}
+
+	</style>
+	<body>
+		<div class="layout">
+			<form method="post">
+				<select th:name="main">
+					<option value="">--선택--</option>
+					<option th:each="type : ${maincategory}" 
+							th:value="${type?.TYPENAME}" 
+							th:utext="${type?.TYPENAME}"></option>
+				</select>		
+				<select th:name="sub">
+					<option value="">--선택--</option>
+					<option th:each="type : ${subcategory}" 
+							th:value="${type?.TYPENAME}" 
+							th:utext="${type?.TYPENAME}"></option>
+				</select><br />
+				제목<input type="text" name="REPNAME"><br />
+				본문<textarea name="REPCONTENT"></textarea><br />
+				<button type="submit" formaction="/board/writePro" onclick="alert('보고서가 등록되었습니다')">등록</button>
+				<button type="button" onclick="window.history.back()">취소</button>			
+			</form>
+		</div>
+	</body>
+</html>
+	
